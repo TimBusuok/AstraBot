@@ -1,13 +1,29 @@
 class TelegramBot{
     string token;
     HttpClient hc = new HttpClient();
-    Thread thread = new Thread(Planet);
+    string planet = "";
+        int R = 0;
+        int D = 0;
+        int S = 0;
+        int S1 = 0;
+        long population = 0;
+        int speed = 0;
+    
+
     
 
     public TelegramBot(string token){
         this.token = token;
         hc = new HttpClient();
         hc.BaseAddress = new Uri($"https://api.telegram.org/bot{token}/");
+        string planet = "";
+        int R = 0;
+        int D = 0;
+        int S = 0;
+        int S1 = 0;
+        long population = 0;
+        int speed = 0;
+        string infoPlanet = string.Format($"Данные о планете {0} - получены\nРадиус = {1}\nДиаметр = {2}\nРасстояние до Солнца = {3}\nРасстояние до Земли = {4}\nПопуляция = {5}\nСкорость планеты = {6}", planet,R,D,S,S1,population,speed);
     }
     
 
@@ -30,9 +46,39 @@ class TelegramBot{
             msg = content;
             return msg;
             case "/planet":
-            content = Planet();
-            msg = content;
+            string qweston = $"О какой планете вы хотите получить данные?:\nМеркурий(/mercure)\nВенера(/venera)\nЗемля(/earth)\nМарс(/mars)\nЮптер(/jupiter)\nСатурн(/saturn)\nУран(/uran)\nНептун(/neptun)";
+            msg = qweston;
             return msg;
+            case "/mercure":
+            planet = "Меркурий";
+            R = R + 2440;
+            D = D + 4880;
+            S = S + 58000000;
+            S1 = S1 + 91600000;
+            speed = speed + 48;
+            string infoPlanet = $"Данные о планете -{planet}- получены:\nРадиус = {R}км\nДиаметр = {D}км\nРасстояние до Солнца = {S}км\nРасстояние до Земли = {S1}км\nПопуляция = пару вездеходов))\nСкорость планеты = {speed}км/с";
+            msg = infoPlanet;
+            return msg;
+            case "/venera":
+            planet = "Венера";
+            R = R + 6052;
+            D = D +12104;
+            S = S + 108000000;
+            S1 = S1 + 41400000;
+            speed = speed + 35;
+            infoPlanet = $"Данные о планете -{planet}- получены:\nРадиус = {R}км\nДиаметр = {D}км\nРасстояние до Солнца = {S}км\nРасстояние до Земли = {S1}км\nПопуляция = пару вездеходов))\nСкорость планеты = {speed}км/с";
+            msg = infoPlanet;
+            return msg;
+            case "/earth":
+            planet = "Земля";
+            R = R + 6371;
+            D = D + 12742;
+            S = S + 150000000;
+            population = population + 8000000000;
+            speed = speed + 35;
+            infoPlanet = $"Данные о планете -{planet}- получены:\nРадиус = {R}км\nДиаметр = {D}км\nРасстояние до Солнца = {S}км\nРасстояние до Земли = {S1}км\nПопуляция = {population} человек\nСкорость планеты = {speed}км/с";
+            msg = infoPlanet;
+            return infoPlanet;
             
         }
         return "Неккоректный ввод";
@@ -99,14 +145,5 @@ class TelegramBot{
 
         return party;
     }
-
-    public string Planet(){
-        string qweston = "О какой планете вы хотите получить данные?:\nМеркурий\nВенера\nЗемля\nМарс\nЮптер\nСатурн\nУран\nНептун";
-        string planet = "";
-        string content = string.Format("Данные о планете {0} - получены", planet);
-        switch(qweston){
-            case "/mercure":
-            
-        }
-    }
+   
 }
